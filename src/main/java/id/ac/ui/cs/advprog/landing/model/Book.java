@@ -1,16 +1,15 @@
 package id.ac.ui.cs.advprog.landing.model;
 
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class Book {
-    private Long id; // ID untuk tujuan internal atau referensi
-    private String title; // Judul buku
-    private String photoUrl; // URL foto buku
-    private int salesCount; // Jumlah penjualan buku
+    private Long id;
+    private String title;
+    private String photoUrl;
+    private int salesCount;
 
     public Book(Long id, String title, String photoUrl, int salesCount) {
         this.id = id;
@@ -18,8 +17,9 @@ public class Book {
         this.photoUrl = photoUrl;
         this.salesCount = salesCount;
     }
+
+    // Factory method buat bikin buku best seller
+    public static Book createBestSellerBook(Long id, String title, String photoUrl, int salesCount) {
+        return new Book(id, title, photoUrl, salesCount);
+    }
 }
-
-
-
-
