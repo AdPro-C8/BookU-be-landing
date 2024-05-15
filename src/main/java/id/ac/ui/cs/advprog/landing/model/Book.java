@@ -2,24 +2,33 @@ package id.ac.ui.cs.advprog.landing.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
+
+import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Book {
-    private Long id;
+    private UUID id;
     private String title;
     private String photoUrl;
     private int salesCount;
-
-    public Book(Long id, String title, String photoUrl, int salesCount) {
-        this.id = id;
-        this.title = title;
-        this.photoUrl = photoUrl;
-        this.salesCount = salesCount;
-    }
-
-    // Factory method buat bikin buku best seller
-    public static Book createBestSellerBook(Long id, String title, String photoUrl, int salesCount) {
-        return new Book(id, title, photoUrl, salesCount);
-    }
+    private String author;
+    private String publisher;
+    private String description;
+    private double price;
+    private int stock;
+    private String isbn;
+    private int numberOfPages;
+    private String category;
+    private double rating;
+    private LocalDate publicationDate;
 }
