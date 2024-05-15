@@ -25,7 +25,7 @@ public class BookServiceImpl implements BookService, Subject {
     }
 
     @Override
-    public List<Book> getTop5BestSellingBooks() {
+    public List<Book> getTop5BooksBySales() {
         topBooks = bookRepository.findTop5ByOrderByTotalSalesDesc();
         notifyObservers();
         return topBooks;
