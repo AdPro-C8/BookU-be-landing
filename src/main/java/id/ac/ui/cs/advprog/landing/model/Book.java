@@ -1,34 +1,19 @@
 package id.ac.ui.cs.advprog.landing.model;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.ToString;
-import lombok.EqualsAndHashCode;
-
-import java.time.LocalDate;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+
+//Book yang didefinisikan di kelas ini hanya terdiri dari atribut yang dibutuhkan pada landing page seperti UUID, judul, dan foto buku
 public class Book {
     private UUID id;
     private String title;
     private String photoUrl;
-    private int salesCount;
-    private String author;
-    private String publisher;
-    private String description;
-    private double price;
-    private int stock;
-    private String isbn;
-    private int numberOfPages;
-    private String category;
-    private double rating;
-    private LocalDate publicationDate;
+
 }
