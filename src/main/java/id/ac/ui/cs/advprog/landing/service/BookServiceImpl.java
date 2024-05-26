@@ -28,7 +28,7 @@ public class BookServiceImpl implements BookService {
         if (booksArray != null) {
             List<BookDTO> books = Arrays.stream(booksArray)
                     .limit(5)
-                    .collect(Collectors.toList());
+                    .toList();
 
             List<CompletableFuture<BookDTO>> futures = books.stream()
                     .map(book -> CompletableFuture.supplyAsync(() -> {
@@ -36,7 +36,7 @@ public class BookServiceImpl implements BookService {
                         book.setRating(rating);
                         return book;
                     }))
-                    .collect(Collectors.toList());
+                    .toList();
 
             CompletableFuture<Void> allFutures = CompletableFuture.allOf(
                     futures.toArray(new CompletableFuture[0])
