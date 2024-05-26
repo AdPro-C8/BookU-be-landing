@@ -47,6 +47,7 @@ jobs:
           JWT_SECRET: IniAdalahSebuahSecretYangSangatAmatRahasiaSuiseinoGotokuArawaretaSutanoGensekiAidoruVtubernoHoshimachiSuiseidesuSuichanwaKYOUUMOKAWAIIIIIIPlisKaliIniBisaAsTAGAAAASHAJSAJSJHAJSDCJDJCHABisaDongPlisssDemiAllahYesusBuddhaBhagavvatGittaTriHitaKaranaSwastiastuNamoBudayaBroFrnggabisabisatfAKHIRNYAAABISAAAAOWKOKWOKWOKWOWKOWKOKokwoKWOKowkowKWOKWOkwoWKokwoKowkoKWOKowkOWKOkOWKOkwoKWOKokwoK
           AUTH_HOST: http://localhost:8000
           BOOKLIST_HOST: http://localhost:8003
+          REVIEW_HOST: http://localhost:8005
 
       - name: Store reports
         if: failure()
