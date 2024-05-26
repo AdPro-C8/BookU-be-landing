@@ -13,11 +13,13 @@ public class BookDTO {
     private int downloadCount;
     private String photoUrl;
     private UUID id;
+    private int rating;
 
-    public BookDTO(String title, int downloadCount, String photoUrl, UUID id) {
+    public BookDTO(String title, int downloadCount, String photoUrl, UUID id, int rating) {
         this.title = title;
         this.downloadCount = downloadCount;
         this.photoUrl = photoUrl;
         this.id = id;
+        this.rating = rating;
     }
 }
