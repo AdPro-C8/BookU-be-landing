@@ -42,3 +42,5 @@ jobs:
           --set-env-vars=PG_PASS=${{ secrets.PG_PASS }} \
           --set-env-vars=AUTH_HOST=${{ secrets.AUTH_HOST }} \
           --set-env-vars=BOOKLIST_HOST=${{ secrets.BOOKLIST_HOST }} 
+
+
