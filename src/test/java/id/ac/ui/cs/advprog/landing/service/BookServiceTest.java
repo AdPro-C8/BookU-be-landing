@@ -1,3 +1,5 @@
+package id.ac.ui.cs.advprog.landing.service;
+
 import id.ac.ui.cs.advprog.landing.dto.BookDTO;
 import id.ac.ui.cs.advprog.landing.service.impl.BookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
