@@ -46,6 +46,9 @@ jobs:
           PORT: 8001
           JWT_SECRET: IniAdalahSebuahSecretYangSangatAmatRahasiaSuiseinoGotokuArawaretaSutanoGensekiAidoruVtubernoHoshimachiSuiseidesuSuichanwaKYOUUMOKAWAIIIIIIPlisKaliIniBisaAsTAGAAAASHAJSAJSJHAJSDCJDJCHABisaDongPlisssDemiAllahYesusBuddhaBhagavvatGittaTriHitaKaranaSwastiastuNamoBudayaBroFrnggabisabisatfAKHIRNYAAABISAAAAOWKOKWOKWOKWOWKOWKOKokwoKWOKowkowKWOKWOkwoWKokwoKowkoKWOKowkOWKOkOWKOkwoKWOKokwoK
           AUTH_HOST: http://localhost:8000
+          BOOKLIST_HOST: http://localhost:8003
+          HISTORY_HOST: http://localhost:8004
+
       - name: Store reports
         if: failure()
         uses: actions/upload-artifact@v3
