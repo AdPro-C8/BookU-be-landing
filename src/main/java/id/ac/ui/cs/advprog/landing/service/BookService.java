@@ -1,27 +1,32 @@
+
 package id.ac.ui.cs.advprog.landing.service;
 
-import id.ac.ui.cs.advprog.landing.model.Book;
+import id.ac.ui.cs.advprog.landing.dto.BookDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-//dengan adanya service ini kelas otomatis menjadi singleton
+
 @Service
 public class BookService {
-    private final List<Book> books = new ArrayList<>();
-    // Pada dasarnya mengapa kita tidak memerlukan repository dan Model karena LandingPage hanya mengambil data dari service lain dan tidak perlu menyimpan data tersebut
-    // Data tersebut hanya perlu diringkas ulang dan ditampilkan pada front end
 
-    //looping 5x, fetchBook diperlukan untuk mengambil data Json milik BookList dan menjadikan milik Landing
-    public void fetchBook (Book book){
-        if (books.size() < 5) { //data json milik adip yang mengandung seluruh atribut Buku akan diambil atribut yang diperlukan untuk landing page saja yaitu berupa nama, judul, dan UUID
-            books.add(book); //iterasi selama 5x
+    public List<BookDTO> getBestSellers() {
+        String url = "http://localhost:7000/book?sortBy=downloadCount";
+        RestTemplate restTemplate = new RestTemplate();
+        BookDTO[] booksArray = restTemplate.getForObject(url, BookDTO[].class);
+
+        if (booksArray != null) {
+            // Sort the books by downloadCount in descending order and limit to top 5
+            return Arrays.stream(booksArray)
+                    .sorted((b1, b2) -> Integer.compare(b2.getDownloadCount(), b1.getDownloadCount()))
+                    .limit(5)
+                    .collect(Collectors.toList());
         } else {
-            throw new IllegalStateException("List already has 5 books."); //Cukup dibatasi hingga pengambilan 5 top
+            return new ArrayList<>();
         }
-    }
-    public List<Book> getBooks(){
-        return books;
     }
 }
