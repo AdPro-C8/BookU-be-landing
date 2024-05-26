@@ -15,9 +15,8 @@ public class BookDTO {
     private UUID id;
     private int rating;
 
-    public BookDTO(String title, int downloadCount, String photoUrl, UUID id, int rating) {
+    public BookDTO(String title, String photoUrl, UUID id, int rating) {
         this.title = title;
-        this.downloadCount = downloadCount;
         this.photoUrl = photoUrl;
         this.id = id;
         this.rating = rating;

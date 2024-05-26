@@ -1,41 +1,62 @@
-package id.ac.ui.cs.advprog.landing.service;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import java.util.List;
-import java.util.UUID;
 import id.ac.ui.cs.advprog.landing.dto.BookDTO;
+import id.ac.ui.cs.advprog.landing.service.impl.BookServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootTest
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 public class BookServiceTest {
 
     @Mock
     private RestTemplate restTemplate;
 
     @InjectMocks
-    private BookService bookService;
+    private BookServiceImpl bookService;
+
+    private BookDTO[] booksArray;
+
+    @BeforeEach
+    public void setUp() {
+        booksArray = new BookDTO[]{
+                new BookDTO("Book 1", "url1", UUID.randomUUID(), 0),
+                new BookDTO("Book 2", "url2", UUID.randomUUID(), 0),
+                new BookDTO("Book 3", "url3", UUID.randomUUID(), 0),
+                new BookDTO("Book 4", "url4", UUID.randomUUID(), 0),
+                new BookDTO("Book 5", "url5", UUID.randomUUID(), 0)
+        };
+    }
 
     @Test
-    public void testGetBestSellers() {
-        BookDTO[] mockResponse = {
-                new BookDTO("Book 1", 100, "https://example.com/photo1.jpg", UUID.randomUUID()),
-                new BookDTO("Book 2", 200, "https://example.com/photo2.jpg", UUID.randomUUID()),
-                new BookDTO("Book 3", 300, "https://example.com/photo3.jpg", UUID.randomUUID()),
-                new BookDTO("Book 4", 400, "https://example.com/photo4.jpg", UUID.randomUUID()),
-                new BookDTO("Book 5", 500, "https://example.com/photo5.jpg", UUID.randomUUID())
-        };
+    public void testGetBestSellers() throws Exception {
+        // Mocking the response of the book list
+        when(restTemplate.getForObject(anyString(), (Class<Object>) anyString().getClass()))
+                .thenReturn(booksArray);
 
-        when(restTemplate.getForObject(anyString(), eq(BookDTO[].class))).thenReturn(mockResponse);
+        // Mocking the response of the rating API
+        when(restTemplate.getForObject(anyString(), (Class<Integer>) anyString().getClass()))
+                .thenReturn(5);
 
-        List<BookDTO> bestSellers = bookService.getBestSellers();
+        CompletableFuture<List<BookDTO>> future = bookService.getBestSellers();
 
+        List<BookDTO> bestSellers = future.get();
         assertNotNull(bestSellers);
         assertEquals(5, bestSellers.size());
-        assertEquals("Book 5", bestSellers.get(0).getTitle());
-        assertEquals("Book 1", bestSellers.get(4).getTitle());
+        bestSellers.forEach(book -> {
+            assertEquals(5, book.getRating());
+        });
     }
 }
