@@ -1,9 +1,8 @@
 package id.ac.ui.cs.advprog.landing.service;
 import id.ac.ui.cs.advprog.landing.dto.BookDTO;
-import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-@Service
 public interface BookService {
-    List<BookDTO> getBestSellers();
+    CompletableFuture<List<BookDTO>> getBestSellers();
 }
