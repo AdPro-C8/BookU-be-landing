@@ -1,13 +1,10 @@
 package id.ac.ui.cs.advprog.landing.functional;
-
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import id.ac.ui.cs.advprog.landing.controller.LandingPageController;
 import id.ac.ui.cs.advprog.landing.dto.BookDTO;
 import id.ac.ui.cs.advprog.landing.service.BookService;

@@ -1,12 +1,8 @@
 package id.ac.ui.cs.advprog.landing.service;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import id.ac.ui.cs.advprog.landing.dto.BookDTO;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
