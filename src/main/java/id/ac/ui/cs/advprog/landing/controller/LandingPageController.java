@@ -8,12 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("landing")
+@RequestMapping("api/landing")
 public class LandingPageController {
     private final BookService bookService;
 
@@ -29,13 +32,14 @@ public class LandingPageController {
 
     @GetMapping("")
     public ResponseEntity<?> getBestSellers(Model model) {
-        for (int i=1; i<6; i++) {
-            Book newBook = new Book(UUID.randomUUID(), "title", "www.adproanjing");
-            bookService.fetchBook(newBook);
-        }
+        String url = "http://localhost:7000/book?sortBy=downloadCount";
+        RestTemplate restTemplate = new RestTemplate();
+        Book[] booksArray = restTemplate.getForObject(url, Book[].class);
 
-        List<Book> bestSellers = bookService.getBooks();
-        return ResponseEntity.ok(bestSellers);
+        List<Book> newBooks = Arrays.stream(booksArray)
+                .map(book -> new Book(book.getTitle(), book.getDownloadCount(), book.getPhotoUrl(), book.getId()))
+                .toList();
+        return ResponseEntity.ok(booksArray);
     }
 
 }
